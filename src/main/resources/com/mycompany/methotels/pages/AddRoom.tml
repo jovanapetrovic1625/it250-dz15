@@ -1,0 +1,8 @@
+<html t:type="layout" title="AddRoom MetHotels"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
+    
+    <h3>Ovo je forma za IT250-DZ05.</h3><br/>
+    <t:beaneditform object="room"/>
+    <t:grid t:source="roomList"/>
+</html>
