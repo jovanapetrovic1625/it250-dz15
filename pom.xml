@@ -39,7 +39,12 @@
         </dependency>
 
         <!-- Provide dependency to the Tapestry javadoc taglet which replaces the Maven component report -->
-
+                <dependency>
+                        <groupId>javax.annotation</groupId>
+                        <artifactId>jsr250-api</artifactId>
+                        <version>1.0</version>
+                        <scope>provided</scope>
+                </dependency>
         </dependencies>
         
     <build>

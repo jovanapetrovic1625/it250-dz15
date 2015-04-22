@@ -1,0 +1,19 @@
+<html t:type="layout" title="AddHotel MetHotels"
+      t:sidebarTitle="Framework Version"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
+    <t:beaneditform object="hotel" exclude="id" add="cityId" >
+        <p:cityId>
+            <t:label for="cityId"/>:
+            <t:select t:blankLabel="Choose city" t:id="cityId" encoder="encoder" model="cityList" validate="required"/>
+        </p:cityId>
+    </t:beaneditform>
+    <t:grid source="hotelList" exclude="id" add="delete,city" row="selectedhotel" reorder="hotelName,numberOfStars,address,city,delete">
+        <p:deleteCell>
+            <t:actionlink t:id="delete" context="selectedhotel.id">Delete</t:actionlink>
+        </p:deleteCell>
+        <p:cityCell>
+            ${city}
+        </p:cityCell>
+    </t:grid>
+</html>
