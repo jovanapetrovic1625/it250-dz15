@@ -1,0 +1,11 @@
+<html t:type="layout" title="Register User"
+      t:sidebarTitle="Framework Version"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
+    
+    <h2>Register.</h2>
+    <t:beaneditform t:id="form" object="userReg" exclude="id,rola">
+        <t:errors/>
+    </t:beaneditform>
+    
+</html>
