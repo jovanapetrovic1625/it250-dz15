@@ -1,7 +1,9 @@
 package com.mycompany.methotels.pages;
 
 import com.mycompany.methotels.entities.Room;
+import com.mycompany.methotels.services.ProtectedPage;
 import java.util.ArrayList;
+import javax.annotation.security.RolesAllowed;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -9,6 +11,8 @@ import org.hibernate.Session;
 
 /** Ovo je strana RoomAdd koja se koristi za IT250-DZ06. */
 
+@ProtectedPage
+@RolesAllowed(value={"Admin"})
 public class RoomAdd {
 
     @Property

@@ -13,13 +13,15 @@ import javax.persistence.Table;
 import org.apache.tapestry5.beaneditor.Validate;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
-/** Ovo je entitet Room koji se koristi za IT250-DZ06. */
-
+/**
+ * Ovo je entitet Room koji se koristi za IT250-DZ06.
+ */
 @Entity
 @Table(name = "room")
 @NamedQueries({
     @NamedQuery(name = "Room.findAll", query = "SELECT r FROM Room r")})
 public class Room implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,7 +45,7 @@ public class Room implements Serializable {
     @Basic(optional = false)
     @Column(name = "hasHotTub")
     private boolean hasHotTub;
-    
+
     @Inject
     public Room() {
     }
@@ -133,5 +135,5 @@ public class Room implements Serializable {
     public String toString() {
         return "com.mycompany.methotels.entities.Room[ id=" + id + " ]";
     }
-    
+
 }

@@ -1,30 +1,29 @@
 package com.mycompany.methotels.pages;
 
 import com.mycompany.methotels.dao.UserDao;
+import com.mycompany.methotels.data.Role;
 import com.mycompany.methotels.entities.User;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SessionState;
 import org.apache.tapestry5.corelib.components.BeanEditForm;
+import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
-public class Login {
+/**
+ *
+ * @author JOVANA
+ */
+public class RegisterUser {
 
-    @Inject
-    private UserDao userDao;
     @Property
-    private User userLogin;
+    private User userReg;
     @SessionState
     private User loggedInUser;
+    @Inject
+    private UserDao userDao;
     @Component
     private BeanEditForm form;
-
-    Object onActivate() {
-        if (loggedInUser.getEmail() != null) {
-            return Index.class;
-        }
-        return null;
-    }
 
     public String getMD5Hash(String yourString) {
         try {
@@ -40,17 +39,17 @@ public class Login {
         }
     }
 
+    @CommitAfter
     Object onSuccess() {
-        String password = getMD5Hash(userLogin.getSifra());
-        System.out.println(password);
-        User u = userDao.checkUser(userLogin.getEmail(), password);
-        if (u != null) {
+        if (!userDao.checkIfEmailExists(userReg.getEmail())) {
+            String unhashPassword = userReg.getSifra();
+            userReg.setSifra(getMD5Hash(unhashPassword));
+            userReg.setRola(Role.Korisnik);
+            User u = userDao.registerUser(userReg);
             loggedInUser = u;
-            System.out.println("LogIn success!");
             return Index.class;
         } else {
-            form.recordError("You have entered bad parameters.");
-            System.out.println("bad parameters");
+            form.recordError("Email already exists.");
             return null;
         }
     }

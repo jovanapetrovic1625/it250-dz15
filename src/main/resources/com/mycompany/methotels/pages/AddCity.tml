@@ -3,6 +3,7 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
       xmlns:p="tapestry:parameter">
     <t:beaneditform object="city" exclude="id" >
+        <t:errors/>
     </t:beaneditform>
     <t:grid source="cityList" exclude="id" add="delete" row="selectedcity">
         <p:deleteCell>

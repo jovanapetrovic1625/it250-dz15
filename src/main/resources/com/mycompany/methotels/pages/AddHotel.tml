@@ -3,6 +3,7 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
       xmlns:p="tapestry:parameter">
     <t:beaneditform object="hotel" exclude="id" add="cityId" >
+        <t:errors/>
         <p:cityId>
             <t:label for="cityId"/>:
             <t:select t:blankLabel="Choose city" t:id="cityId" encoder="encoder" model="cityList" validate="required"/>
