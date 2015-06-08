@@ -54,5 +54,10 @@ public class HotelCityDaoImpl implements HotelCityDao {
         Hotel hotel = (Hotel) session.createCriteria(Hotel.class).add(Restrictions.eq("id", id)).uniqueResult(); 
         session.delete(hotel);
     }
+    
+    @Override
+    public void addOrUpdateCity(City city) {
+        session.merge(city);
+    }
 
 }

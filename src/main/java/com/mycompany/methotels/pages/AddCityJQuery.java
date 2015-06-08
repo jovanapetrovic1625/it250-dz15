@@ -1,18 +1,20 @@
 package com.mycompany.methotels.pages;
 
-import com.mycompany.methotels.components.GenericEditor;
 import com.mycompany.methotels.dao.HotelCityDao;
 import com.mycompany.methotels.entities.City;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.tapestry5.annotations.Component;
-import org.apache.tapestry5.annotations.PageLoaded;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.json.JSONObject;
 
-public class AddCity {
+/**
+ *
+ * @author JOVANA
+ */
+public class AddCityJQuery {
 
     @Property
     @Persist
@@ -20,31 +22,27 @@ public class AddCity {
     @Property
     private City selectedcity;
     @Inject
-    private HotelCityDao cityDao;
+    private HotelCityDao hotelCityDao;
     @Property
     private List<City> cityList;
 
     void onActivate() {
-    }
-
-    @PageLoaded
-    void onPageLoad() {
         if (cityList == null) {
             cityList = new ArrayList<City>();
         }
-        cityList = cityDao.getAllCitiesList();
+        cityList = hotelCityDao.getAllCitiesList();
     }
 
     @CommitAfter
     Object onSuccess() {
-        cityDao.addCity(city);
+        hotelCityDao.addOrUpdateCity(city);
+        city = new City();
         return this;
     }
 
     @CommitAfter
     Object onActionFromDelete(int id) {
-        cityDao.addOrUpdateCity(city);
-        city = new City();
+        hotelCityDao.deleteCity(id);
         return this;
     }
 
@@ -52,5 +50,13 @@ public class AddCity {
     Object onActionFromEdit(City city) {
         this.city = city;
         return this;
+    }
+
+    public JSONObject getOptions() {
+        JSONObject json = new JSONObject();
+        json.put("bJQueryUI", "true");
+        json.put("bStateSave", true);
+        json.put("bAutoWidth", true);
+        return json;
     }
 }

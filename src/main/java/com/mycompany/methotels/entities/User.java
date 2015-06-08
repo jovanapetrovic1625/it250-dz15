@@ -18,13 +18,8 @@ import javax.persistence.Id;
 @Table(name = "user")
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")})
-public class User {
+public class User extends AbstractEntity {
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
 
     @Column(name = "email")
     private String email;
@@ -40,25 +35,6 @@ public class User {
     public User() {
     }
     
-    public User (Integer id) {
-        this.id = id;
-    }
-
-    public User(Integer id, String email, String sifra, Role rola) {
-        this.id = id;
-        this.email = email;
-        this.sifra = sifra;
-        this.rola = rola;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public String getEmail() {
         return email;
     }

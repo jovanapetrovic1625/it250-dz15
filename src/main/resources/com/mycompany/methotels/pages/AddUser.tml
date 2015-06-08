@@ -1,15 +1,20 @@
 <html t:type="layout" title="Add user"
-    t:sidebarTitle="Framework Version"
-    xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
-    xmlns:p="tapestry:parameter">
+      t:sidebarTitle="Framework Version"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
     
-    <h3>Ovo je forma za dodavanje korisnika, IT250-DZ08.</h3><br/>
+    <h3>Ovo je forma za dodavanje korisnika, IT250-DZ08.</h3>
+    <br/>
     <t:beaneditform object="user" exclude="id" >
         <t:errors/>
     </t:beaneditform>
-    <t:grid source="userList" exclude="id" add="delete" row="selecteduser">
+    <t:grid source="userList" exclude="id" add="edit,delete" row="selecteduser">
+        <p:editCell>
+            <t:actionlink t:id="edit" context="selecteduser.id" >Edit</t:actionlink>
+        </p:editCell>
         <p:deleteCell>
             <t:actionlink t:id="delete" context="selecteduser.id" >Delete</t:actionlink>
         </p:deleteCell>
     </t:grid>
+
 </html>

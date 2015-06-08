@@ -22,4 +22,6 @@ public interface HotelCityDao {
 
     public void deleteHotel(Integer id);
 
+    public void addOrUpdateCity(City city);
+
 }

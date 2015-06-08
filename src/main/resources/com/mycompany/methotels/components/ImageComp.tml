@@ -1,0 +1,8 @@
+<html title="Image Comp" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+	
+    <h4>This is ImageComponent which can be used to set logo/brand picture with home page link.</h4>
+    <t:actionlink t:id="toHome" >
+        <img src="${asset:context:images/hotel-logo.png}"/>
+    </t:actionlink>
+    
+</html>

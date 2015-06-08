@@ -1,5 +1,7 @@
 package com.mycompany.methotels.services;
 
+import com.mycompany.methotels.dao.GenericDao;
+import com.mycompany.methotels.dao.GenericDaoImpl;
 import com.mycompany.methotels.dao.HotelCityDao;
 import com.mycompany.methotels.dao.HotelCityDaoImpl;
 import com.mycompany.methotels.dao.UserDao;
@@ -31,6 +33,7 @@ public class AppModule {
     public static void bind(ServiceBinder binder) {
         binder.bind(HotelCityDao.class, HotelCityDaoImpl.class);
         binder.bind(UserDao.class, UserDaoImpl.class);
+        binder.bind(GenericDao.class, GenericDaoImpl.class);
 
         // Make bind() calls on the binder object to define most IoC services.
         // Use service builder methods (example below) when the implementation

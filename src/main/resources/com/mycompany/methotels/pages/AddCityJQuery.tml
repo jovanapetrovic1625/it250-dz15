@@ -1,16 +1,17 @@
-<html t:type="layout" title="AddCity MetHotels"
+<html t:type="layout" title="TapestryHibernateDemo Index"
       t:sidebarTitle="Framework Version"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
       xmlns:p="tapestry:parameter">
     <t:beaneditform object="city" exclude="id" >
-        <t:errors/>
     </t:beaneditform>
-    <t:grid source="cityList" exclude="id" add="edit, delete" row="selectedcity">
+    <t:jquery.datatable source="cityList" exclude="id" add="edit,delete" t:options="options"
+                    row="selectedcity">
         <p:editCell>
-            <t:actionlink t:id="edit" context="selectedcity.id">Edit</t:actionlink>
+            <t:actionlink t:id="edit" context="selectedcity">Edit</t:actionlink>
         </p:editCell>
         <p:deleteCell>
             <t:actionlink t:id="delete" context="selectedcity.id">Delete</t:actionlink>
         </p:deleteCell>
-    </t:grid>
+    </t:jquery.datatable>
+ 
 </html>
