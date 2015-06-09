@@ -24,4 +24,10 @@ public interface HotelCityDao {
 
     public void addOrUpdateCity(City city);
 
+    public List<City> getCityListByName(String name);
+
+    public abstract int allActiveSizeCity();
+
+    public abstract List<City> loadActiveFromTo(int from);
+
 }
