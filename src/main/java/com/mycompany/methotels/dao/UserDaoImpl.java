@@ -1,6 +1,6 @@
 package com.mycompany.methotels.dao;
 
-import com.mycompany.methotels.entities.City;
+import com.mycompany.methotels.entities.Room;
 import com.mycompany.methotels.entities.User;
 import java.util.List;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -63,5 +63,10 @@ public class UserDaoImpl implements UserDao {
     public void deleteUser(Integer id) {
         User user = (User) session.createCriteria(User.class).add(Restrictions.eq("id", id)).uniqueResult();
         session.delete(user);
+    }
+
+    @Override
+    public void addOrUpdateUser(User user) {
+        session.merge(user);
     }
 }

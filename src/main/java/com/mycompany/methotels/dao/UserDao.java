@@ -22,5 +22,7 @@ public interface UserDao {
     public User registerUser(User user);
 
     public boolean checkIfEmailExists(String email);
+    
+    public void addOrUpdateUser(User user);
        
 }

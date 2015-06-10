@@ -1,0 +1,12 @@
+<html t:type="layout" title="InPlaceEditor Example"
+      t:sidebarTitle="Framework Version"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
+    <t:grid source="userList" row="user" exclude="id" t:inplace="true">
+        <p:userEmailCell>
+            <div t:id="userEmail" value="user.email" t:type="jquery/inPlaceEditor"
+     t:context="user.id"/>
+
+        </p:userEmailCell>
+    </t:grid>
+</html>

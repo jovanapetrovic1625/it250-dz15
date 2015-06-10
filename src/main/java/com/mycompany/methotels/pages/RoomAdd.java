@@ -12,7 +12,7 @@ import org.hibernate.Session;
 /** Ovo je strana RoomAdd koja se koristi za IT250-DZ06. */
 
 @ProtectedPage
-@RolesAllowed(value={"Admin"})
+@RolesAllowed(value={"Admin,Korisnik"})
 public class RoomAdd {
 
     @Property
