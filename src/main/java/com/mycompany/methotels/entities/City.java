@@ -13,13 +13,16 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 @Entity
+@XmlRootElement
 @Table(name = "city")
 @NamedQueries({
     @NamedQuery(name = "City.findAll", query = "SELECT c FROM City c")})
 public class City implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -117,5 +120,5 @@ public class City implements Serializable {
     public String toString() {
         return "com.mycompany.methotels.entities.City[ id=" + id + " ]";
     }
-    
+
 }

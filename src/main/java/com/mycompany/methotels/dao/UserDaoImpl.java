@@ -1,6 +1,5 @@
 package com.mycompany.methotels.dao;
 
-import com.mycompany.methotels.entities.Room;
 import com.mycompany.methotels.entities.User;
 import java.util.List;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -68,5 +67,19 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void addOrUpdateUser(User user) {
         session.merge(user);
+    }
+
+    @Override
+    public User checkIfFbExists(String id) {
+        try {
+            User u = (User) session.createCriteria(User.class).add(Restrictions.eq("facebookId",
+                    id)).uniqueResult();
+            if (u != null) {
+                return u;
+            }
+            return null;
+        } catch (NullPointerException e) {
+            return null;
+        }
     }
 }

@@ -23,6 +23,8 @@ public interface UserDao {
 
     public boolean checkIfEmailExists(String email);
     
+    public User checkIfFbExists(String id);
+    
     public void addOrUpdateUser(User user);
        
 }

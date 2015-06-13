@@ -41,6 +41,7 @@ public class AppModule {
         binder.bind(UserDao.class, UserDaoImpl.class);
         binder.bind(GenericDao.class, GenericDaoImpl.class);
         binder.bind(UserWebServiceInterface.class, UserWebService.class);
+        binder.bind(FacebookService.class);
 
         // Make bind() calls on the binder object to define most IoC services.
         // Use service builder methods (example below) when the implementation

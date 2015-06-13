@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.tapestry5.beaneditor.Validate;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
@@ -17,6 +18,7 @@ import org.apache.tapestry5.ioc.annotations.Inject;
  * Ovo je entitet Room koji se koristi za IT250-DZ06.
  */
 @Entity
+@XmlRootElement
 @Table(name = "room")
 @NamedQueries({
     @NamedQuery(name = "Room.findAll", query = "SELECT r FROM Room r")})

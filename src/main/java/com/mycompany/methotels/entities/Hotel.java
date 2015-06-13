@@ -12,13 +12,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 @Entity
+@XmlRootElement
 @Table(name = "hotel")
 @NamedQueries({
     @NamedQuery(name = "Hotel.findAll", query = "SELECT h FROM Hotel h")})
 public class Hotel implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +40,7 @@ public class Hotel implements Serializable {
     @JoinColumn(name = "cityId", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private City cityId;
-    
+
     @Inject
     public Hotel() {
     }
@@ -117,5 +120,5 @@ public class Hotel implements Serializable {
     public String toString() {
         return "com.mycompany.methotels.entities.Hotel[ id=" + id + " ]";
     }
-    
+
 }
