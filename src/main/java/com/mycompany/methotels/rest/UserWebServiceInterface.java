@@ -9,6 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 
 
@@ -22,7 +23,8 @@ public interface UserWebServiceInterface {
     @GET
     @Produces({"application/json"})
     public List<User> getAll();
-
+    
+    @RequiresAuthentication
     @GET
     @Path("{id}")
     @Produces({"application/json"})

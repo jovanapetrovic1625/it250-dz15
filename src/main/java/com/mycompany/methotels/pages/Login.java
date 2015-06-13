@@ -10,6 +10,8 @@ import com.restfb.FacebookClient;
 import java.io.IOException;
 import net.smartam.leeloo.common.exception.OAuthProblemException;
 import net.smartam.leeloo.common.exception.OAuthSystemException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.apache.tapestry5.annotations.ActivationRequestParameter;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.Property;
@@ -18,6 +20,7 @@ import org.apache.tapestry5.annotations.SetupRender;
 import org.apache.tapestry5.corelib.components.BeanEditForm;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.tynamo.security.services.SecurityService;
 
 public class Login {
 
@@ -29,6 +32,10 @@ public class Login {
     private User loggedInUser;
     @Component
     private BeanEditForm form;
+
+    @Inject
+    private SecurityService securityService;
+
     @Inject
     private FacebookService facebookService;
     @SessionState
@@ -39,6 +46,7 @@ public class Login {
     private FacebookServiceInformation information;
     @Property
     private com.restfb.types.User userfb;
+
     @Property
     @ActivationRequestParameter
     private String code;
@@ -71,6 +79,14 @@ public class Login {
         if (u != null) {
             loggedInUser = u;
             System.out.println("LogIn success!");
+            Subject currentUser = securityService.getSubject();
+            UsernamePasswordToken token = new UsernamePasswordToken(u.getEmail(),
+                    userLogin.getSifra());
+            try {
+                currentUser.login(token);
+            } catch (Exception e) {
+                form.recordError("Uneli ste pogrešne parametre");
+            }
             return Index.class;
         } else {
             form.recordError("You have entered bad parameters.");

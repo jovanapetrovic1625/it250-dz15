@@ -10,6 +10,8 @@ import com.mycompany.methotels.pages.PageProtectionFilter;
 import com.mycompany.methotels.rest.UserWebService;
 import com.mycompany.methotels.rest.UserWebServiceInterface;
 import java.io.IOException;
+import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.realm.Realm;
 
 import org.apache.tapestry5.*;
 import org.apache.tapestry5.hibernate.HibernateTransactionAdvisor;
@@ -19,6 +21,7 @@ import org.apache.tapestry5.ioc.MethodAdviceReceiver;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
+import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.apache.tapestry5.ioc.annotations.Local;
 import org.apache.tapestry5.ioc.annotations.Match;
 import org.apache.tapestry5.ioc.services.ApplicationDefaults;
@@ -28,6 +31,8 @@ import org.apache.tapestry5.services.javascript.JavaScriptStack;
 import org.apache.tapestry5.services.javascript.StackExtension;
 import org.apache.tapestry5.services.javascript.StackExtensionType;
 import org.slf4j.Logger;
+import org.tynamo.security.services.SecurityFilterChainFactory;
+import org.tynamo.security.services.impl.SecurityFilterChain;
 
 /**
  * This module is automatically included as part of the Tapestry IoC Registry,
@@ -42,11 +47,31 @@ public class AppModule {
         binder.bind(GenericDao.class, GenericDaoImpl.class);
         binder.bind(UserWebServiceInterface.class, UserWebService.class);
         binder.bind(FacebookService.class);
+        binder.bind(AuthorizingRealm.class, UserRealm.class).withId(UserRealm.class.getSimpleName());
 
         // Make bind() calls on the binder object to define most IoC services.
         // Use service builder methods (example below) when the implementation
         // is provided inline, or requires more initialization than simply
         // invoking the constructor.
+    }
+
+    public static void contributeWebSecurityManager(Configuration<Realm> configuration,
+            @InjectService("UserRealm") AuthorizingRealm userRealm) {
+        configuration.add(userRealm);
+    }
+
+    public static void contributeHttpServletRequestHandler(
+            @InjectService("SecurityConfiguration") HttpServletRequestFilter securityConfiguration,
+            OrderedConfiguration<HttpServletRequestFilter> filters) {
+        filters.override("SecurityConfiguration", securityConfiguration,
+                "before:ResteasyRequestFilter,after:StoreIntoGlobals");
+    }
+
+    public static void
+            contributeSecurityConfiguration(Configuration<SecurityFilterChain> configuration,
+                    SecurityFilterChainFactory factory) {
+// /authc/** rule covers /authc , /authc?q=name /authc#anchor urls as well
+        configuration.add(factory.createChain("/rest/**").add(factory.basic()).build());
     }
 
     @Match("*User*")

@@ -5,12 +5,14 @@ import com.mycompany.methotels.entities.City;
 import com.mycompany.methotels.entities.Hotel;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.tapestry5.ValueEncoder;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
+@RequiresRoles("Admin")
 public class AddHotel {
 
     @Property
